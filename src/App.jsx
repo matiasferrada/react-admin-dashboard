@@ -1,10 +1,17 @@
-function App() {
+import { useState } from "react";
+import Login from "./pages/Login";
+import Admin from "./pages/Admin";
+
+export default function App() {
+  const [logged, setLogged] = useState(!!localStorage.getItem("token"));
+
+  function handleLogin() {
+    setLogged(true);
+  }
+
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>Admin Dashboard</h1>
-      <p>React admin dashboard demo project.</p>
+    <div>
+      {logged ? <Admin /> : <Login onLogin={handleLogin} />}
     </div>
   );
 }
-
-export default App;
